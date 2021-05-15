@@ -1,0 +1,20 @@
+{
+  "name": "testEnviame",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/margoar/testEnviame.git"
+  },
+  "keywords": [],
+  "author": "Marcela Gonzalez",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/margoar/testEnviame/issues"
+  },
+  "homepage": "https://github.com/margoar/testEnviame#readme"
+}
