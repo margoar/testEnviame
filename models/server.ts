@@ -3,12 +3,16 @@ import express,{Application} from 'express';
 import Empresarouter from '../routes/empresa';
 import cors  from 'cors';
 import db from '../db/connection';
+import Deliveryrouter from '../routes/delivery';
+import Empleadorouter from '../routes/empleado'
 class Server {
     
     private app: Application;
     private port: string;
     private apiPaths = {
-        empresas : '/api/empresas'
+        empresa : '/api/empresas',
+        delivery: '/api/delivery',
+        empleado: '/api/empleado'
     }
 
     constructor(){
@@ -40,7 +44,9 @@ class Server {
     }
 
     routes(){
-        this.app.use(this.apiPaths.empresas, Empresarouter)
+        this.app.use(this.apiPaths.empresa, Empresarouter);
+        this.app.use(this.apiPaths.delivery, Deliveryrouter);
+        this.app.use(this.apiPaths.empleado, Empleadorouter)
     }
 
     listen(){

@@ -4,6 +4,7 @@ const express_1 = require("express");
 const empresa_1 = require("../controllers/empresa");
 const router = express_1.Router();
 //definiendo nuestros endpoint
+router.post('/:isFake', empresa_1.generaEmpresasFake);
 router.post('/', empresa_1.crearEmpresa);
 router.get('/', empresa_1.listarEmpresas);
 router.get('/:id', empresa_1.obtenerEmpresa);

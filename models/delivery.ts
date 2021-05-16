@@ -1,7 +1,7 @@
 import {DataTypes} from 'sequelize';
 import  db from '../db/connection';
 
-const Empresa = db.define('Empresa', {
+const Delivery = db.define('Delivery', {
 
     nombreFantasia: {
         type: DataTypes.STRING
@@ -27,4 +27,4 @@ const Empresa = db.define('Empresa', {
    
 });
 
-export default Empresa;
+export default Delivery;
