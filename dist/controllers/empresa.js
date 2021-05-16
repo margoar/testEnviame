@@ -23,17 +23,20 @@ const crearEmpresa = (req, res) => {
 };
 exports.crearEmpresa = crearEmpresa;
 const listarEmpresas = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const empresa = yield empresa_1.default.findAll();
-    res.json(empresa);
+    const empresas = yield empresa_1.default.findAll();
+    res.json(empresas);
 });
 exports.listarEmpresas = listarEmpresas;
-const obtenerEmpresa = (req, res) => {
+const obtenerEmpresa = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { id } = req.params;
-    res.json({
-        msg: 'obtener empresa por id',
-        id
-    });
-};
+    const empresa = yield empresa_1.default.findByPk(id);
+    if (empresa) {
+        res.json(empresa);
+    }
+    else {
+        res.status(404).json({ msg: `No existe empresa con el id ${id}` });
+    }
+});
 exports.obtenerEmpresa = obtenerEmpresa;
 const actualizarEmpresa = (req, res) => {
     const { id } = req.params;

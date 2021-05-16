@@ -4,24 +4,40 @@ import Empresa from '../models/empresa';
 
 export const crearEmpresa = (req: Request, res:Response) =>{
     const {body} = req;
-    res.json({
-        msg: 'Crear empresa',
-        body
-    })
+
+    try {
+        res.json({
+            msg: 'Crear empresa',
+            body
+        })
+    } catch (error) {
+        console.log(error);        
+        res.status(500).json({
+            msg: 'Ups! ha ocurrido un problema, hable con el administrador.'
+        })
+        
+    }
+
 }
 
 export const listarEmpresas = async (req: Request, res:Response) =>{
 
-    const empresa = await Empresa.findAll();
-    res.json (empresa);
+    const empresas = await Empresa.findAll();
+    res.json (empresas);
 }
 
-export const obtenerEmpresa = (req: Request, res:Response) =>{
+export const obtenerEmpresa = async(req: Request, res:Response) =>{
+    
     const {id} = req.params;
-    res.json({
-        msg: 'obtener empresa por id',
-        id
-    })
+    const empresa = await Empresa.findByPk(id);
+
+    if(empresa){
+        res.json(empresa)
+    }else{
+        res.status(404).json({msg:`No existe una empresa con el id ${id}`});
+    }
+
+  
 }
 
 
