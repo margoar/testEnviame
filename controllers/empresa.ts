@@ -1,4 +1,5 @@
 import {Request, Response} from 'express';
+import Empresa from '../models/empresa';
 
 
 export const crearEmpresa = (req: Request, res:Response) =>{
@@ -9,10 +10,10 @@ export const crearEmpresa = (req: Request, res:Response) =>{
     })
 }
 
-export const listarEmpresas = (req: Request, res:Response) =>{
-    res.json ({
-        msg: 'Listando Empresas...'
-    });
+export const listarEmpresas = async (req: Request, res:Response) =>{
+
+    const empresa = await Empresa.findAll();
+    res.json (empresa);
 }
 
 export const obtenerEmpresa = (req: Request, res:Response) =>{

@@ -19,7 +19,7 @@ const connection_1 = __importDefault(require("../db/connection"));
 class Server {
     constructor() {
         this.apiPaths = {
-            empresas: '/api/empresas'
+            empresa: '/api/empresas'
         };
         this.app = express_1.default();
         this.port = process.env.PORT || '8000';
@@ -43,7 +43,7 @@ class Server {
         this.app.use(express_1.default.json());
     }
     routes() {
-        this.app.use(this.apiPaths.empresas, empresa_1.default);
+        this.app.use(this.apiPaths.empresa, empresa_1.default);
     }
     listen() {
         this.app.listen(this.port, () => {

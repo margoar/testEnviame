@@ -8,7 +8,7 @@ class Server {
     private app: Application;
     private port: string;
     private apiPaths = {
-        empresas : '/api/empresas'
+        empresa : '/api/empresas'
     }
 
     constructor(){
@@ -40,7 +40,7 @@ class Server {
     }
 
     routes(){
-        this.app.use(this.apiPaths.empresas, Empresarouter)
+        this.app.use(this.apiPaths.empresa, Empresarouter)
     }
 
     listen(){
