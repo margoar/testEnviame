@@ -1,10 +1,10 @@
 import {Router} from 'express';
-import { actualizarEmpresa, crearEmpresa, eliminarEmpresa, listarEmpresas, obtenerEmpresa } from '../controllers/empresa'
+import { actualizarEmpresa, crearEmpresa, eliminarEmpresa, listarEmpresas, obtenerEmpresa,generaEmpresasFake } from '../controllers/empresa'
 
 const router = Router();
 
 //definiendo nuestros endpoint
-
+router.post('/:isFake', generaEmpresasFake);
 router.post('/', crearEmpresa);
 router.get('/', listarEmpresas);
 router.get('/:id',obtenerEmpresa);

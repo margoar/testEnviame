@@ -12,11 +12,20 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.eliminarEmpresa = exports.actualizarEmpresa = exports.obtenerEmpresa = exports.listarEmpresas = exports.crearEmpresa = void 0;
+exports.generaEmpresasFake = exports.eliminarEmpresa = exports.actualizarEmpresa = exports.obtenerEmpresa = exports.listarEmpresas = exports.crearEmpresa = void 0;
 const empresa_1 = __importDefault(require("../models/empresa"));
+const faker_1 = __importDefault(require("faker"));
+const rut_utilities_1 = require("@fdograph/rut-utilities");
 const crearEmpresa = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { body } = req;
     try {
+        //validar el rut
+        console.log(body.rut);
+        if (!rut_utilities_1.validateRut(body.rut)) {
+            return res.status(400).json({
+                msg: `rut invalido`
+            });
+        }
         //Validamos existencia previa empresa para evitar registros duplicados.
         const existeEmpresa = yield empresa_1.default.findOne({
             where: {
@@ -28,7 +37,6 @@ const crearEmpresa = (req, res) => __awaiter(void 0, void 0, void 0, function* (
                 msg: `Ya existe una empersa con el rut ${body.rut}`
             });
         }
-        //Si la empresa no existe hay que validar el rut
         const empresa = yield empresa_1.default.create(body);
         res.json(empresa);
     }
@@ -97,4 +105,31 @@ const eliminarEmpresa = (req, res) => __awaiter(void 0, void 0, void 0, function
     });
 });
 exports.eliminarEmpresa = eliminarEmpresa;
+const generaEmpresasFake = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const { isFake } = req.params;
+    try {
+        let empresasFake = [];
+        if (isFake) {
+            for (let i = 0; i <= 10; i++) {
+                let empresaFake = {
+                    nombreFantasia: faker_1.default.company.companyName(),
+                    razonSocial: faker_1.default.company.companyName() + ' ' + faker_1.default.company.companySuffix(),
+                    rut: rut_utilities_1.generateRut().replace('-', ''),
+                    direccion: faker_1.default.address.streetAddress(),
+                    estado: 1
+                };
+                empresasFake.push(empresaFake);
+            }
+            yield empresa_1.default.bulkCreate(empresasFake);
+            res.json(empresasFake);
+        }
+    }
+    catch (error) {
+        console.log(error);
+        res.status(500).json({
+            msg: 'Ups! ha ocurrido un problema, hable con el administrador.'
+        });
+    }
+});
+exports.generaEmpresasFake = generaEmpresasFake;
 //# sourceMappingURL=empresa.js.map

@@ -1,10 +1,22 @@
 import {Request, Response} from 'express';
 import Empresa from '../models/empresa';
+import faker from 'faker';
+import { validateRut, generateRut } from '@fdograph/rut-utilities';
+
 
 export const crearEmpresa = async(req: Request, res:Response) =>{
     const {body} = req;
 
     try {
+        //validar el rut
+        console.log(body.rut);
+        
+        if(!validateRut(body.rut)){
+            return res.status(400).json({
+                msg: `rut invalido`
+            });
+        }
+        
         //Validamos existencia previa empresa para evitar registros duplicados.
         const existeEmpresa = await Empresa.findOne({
             where:{
@@ -17,8 +29,7 @@ export const crearEmpresa = async(req: Request, res:Response) =>{
                 msg: `Ya existe una empersa con el rut ${body.rut}`
             });
         }
-        //Si la empresa no existe hay que validar el rut
-    
+
         const empresa = await Empresa.create(body);
  
         res.json(empresa);
@@ -96,5 +107,39 @@ export const eliminarEmpresa = async(req: Request, res:Response) =>{
             msg: `la empresa con el id ${id} se ha eliminado correctamente`
         });
 }
+
+export const generaEmpresasFake= async(req: Request, res:Response) =>{
+    const {isFake} = req.params;
+
+        try {
+            let empresasFake = [];
+            if(isFake){
+                for (let i = 0; i <= 10 ; i++) {
+                    let empresaFake = {
+
+                        nombreFantasia : faker.company.companyName(),
+                        razonSocial : faker.company.companyName() + ' ' + faker.company.companySuffix(),
+                        rut : generateRut().replace('-',''),                    
+                        direccion : faker.address.streetAddress(),
+                        estado : 1
+                    };
+                                     
+                    empresasFake.push(empresaFake);
+                               
+                }  
+                await Empresa.bulkCreate(empresasFake);
+                res.json(empresasFake);
+            }
+            
+        } catch (error) {
+            console.log(error);        
+            res.status(500).json({
+                msg: 'Ups! ha ocurrido un problema, hable con el administrador.'
+            });        
+        }
+
+    }
+
+  
 
 
