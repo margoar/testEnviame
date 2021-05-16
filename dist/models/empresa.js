@@ -23,6 +23,9 @@ const Empresa = connection_1.default.define('Empresa', {
     },
     updatedAt: {
         type: sequelize_1.DataTypes.DATE
+    },
+    createdAt: {
+        type: sequelize_1.DataTypes.DATE
     }
 });
 exports.default = Empresa;

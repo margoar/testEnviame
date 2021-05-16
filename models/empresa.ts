@@ -20,6 +20,9 @@ const Empresa = db.define('Empresa', {
     },
     updatedAt:{
         type:DataTypes.DATE
+    },
+    createdAt:{
+        type:DataTypes.DATE
     }
    
 });
