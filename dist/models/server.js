@@ -16,10 +16,14 @@ const express_1 = __importDefault(require("express"));
 const empresa_1 = __importDefault(require("../routes/empresa"));
 const cors_1 = __importDefault(require("cors"));
 const connection_1 = __importDefault(require("../db/connection"));
+const delivery_1 = __importDefault(require("../routes/delivery"));
+const empleado_1 = __importDefault(require("../routes/empleado"));
 class Server {
     constructor() {
         this.apiPaths = {
-            empresa: '/api/empresas'
+            empresa: '/api/empresas',
+            delivery: '/api/delivery',
+            empleado: '/api/empleado'
         };
         this.app = express_1.default();
         this.port = process.env.PORT || '8000';
@@ -44,6 +48,8 @@ class Server {
     }
     routes() {
         this.app.use(this.apiPaths.empresa, empresa_1.default);
+        this.app.use(this.apiPaths.delivery, delivery_1.default);
+        this.app.use(this.apiPaths.empleado, empleado_1.default);
     }
     listen() {
         this.app.listen(this.port, () => {

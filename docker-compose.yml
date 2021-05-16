@@ -1,0 +1,19 @@
+version: "3.8"
+services:
+  enviame:
+    enviametest:
+      build: . /
+      ports:
+        - "8123:8123"
+      depends_on:
+        - db
+      environment:
+        - DATABASE_HOST=db
+      volumes:
+        - ./
+    dbmysql:
+      build: . /
+      command: --default-authentication-plugin=mysql_native_password
+      restart: always
+      ports:
+        - 3318:3306
