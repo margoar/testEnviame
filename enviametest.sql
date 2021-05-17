@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 16-05-2021 a las 23:42:54
+-- Tiempo de generación: 17-05-2021 a las 21:08:41
 -- Versión del servidor: 8.0.17
 -- Versión de PHP: 8.0.6
 
@@ -82,8 +82,17 @@ INSERT INTO `countries` (`id`, `continent_id`, `name`) VALUES
 
 CREATE TABLE `delivery` (
   `id` int(11) NOT NULL,
-  `data` json NOT NULL
+  `data` json NOT NULL,
+  `createdAt` timestamp NULL DEFAULT NULL,
+  `updatedAt` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Volcado de datos para la tabla `delivery`
+--
+
+INSERT INTO `delivery` (`id`, `data`, `createdAt`, `updatedAt`) VALUES
+(1, '{\"label\": {\"PDF\": null, \"PNG\": null, \"ZPL\": null}, \"links\": [{\"rel\": \"self\", \"href\": \"https://stage.api.enviame.io/api/s2/v2/deliveries/1569769\"}, {\"rel\": \"tracking\", \"href\": \"https://stage.api.enviame.io/api/s2/v2/deliveries/1569769/tracking\"}, {\"rel\": \"tracking-web\", \"href\": \"https://stage.api.enviame.io/s2/companies/401/deliveries/1569769/tracking\"}], \"status\": {\"id\": 5, \"code\": \"CREATED\", \"info\": \"Ya creamos tu envío en: BLUEXPRESS  - \", \"name\": \"Listo para despacho\", \"created_at\": \"2021-05-17 15:02:20\"}, \"carrier\": \"BLUEXPRESS\", \"country\": \"CL\", \"service\": \"priority\", \"barcodes\": null, \"customer\": {\"email\": \"mgggg@outlook.com\", \"phone\": \"977623070\", \"full_name\": \"Marcela Gonzalez Arias\"}, \"created_at\": \"2021-05-17 15:02:16\", \"identifier\": 1569769, \"updated_at\": \"2021-05-17 15:02:20\", \"deadline_at\": \"No informada.\", \"imported_id\": \"201569769\", \"tracking_number\": \"12121\", \"shipping_address\": {\"type\": \"home\", \"place\": \"Puente Alto\", \"full_address\": \"Teofilo Belmar 6552, Puente Alto\"}}', '2021-05-17 19:06:14', '2021-05-17 19:06:14');
 
 -- --------------------------------------------------------
 
@@ -108,7 +117,7 @@ CREATE TABLE `employees` (
 INSERT INTO `employees` (`id`, `country_id`, `first_name`, `last_name`, `salary`, `createdAt`, `updatedAt`) VALUES
 (1, 1, 'Pedro', 'Rojas', 2080, NULL, NULL),
 (2, 2, 'Luciano', 'Alessandri', 2184, NULL, NULL),
-(3, 3, 'John', 'Carter', 3172, NULL, NULL),
+(3, 3, 'John', 'Carter', 3431, NULL, NULL),
 (4, 4, 'Alejandra', 'Benavides', 2236, NULL, NULL),
 (5, 5, 'Moritz', 'Baring', 6000, NULL, NULL),
 (6, 6, 'Thierry', 'Henry', 5900, NULL, NULL),
@@ -241,7 +250,7 @@ ALTER TABLE `countries`
 -- AUTO_INCREMENT de la tabla `delivery`
 --
 ALTER TABLE `delivery`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `employees`
