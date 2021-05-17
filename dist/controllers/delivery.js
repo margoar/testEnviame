@@ -8,10 +8,66 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.tiempoEntrega = exports.crearDelivery = void 0;
+const axios_1 = __importDefault(require("axios"));
+const delivery_1 = __importDefault(require("../models/delivery"));
 const crearDelivery = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
+        console.log('Consumiendo Api...');
+        const envio = yield axios_1.default({
+            method: 'POST',
+            url: 'https://stage.api.enviame.io/api/s2/v2/companies/401/deliveries',
+            headers: {
+                "Accept": "application/json",
+                "Content-Type": "application/json",
+                "api-key": "ea670047974b650bbcba5dd759baf1ed"
+            },
+            data: {
+                "shipping_order": {
+                    "n_packages": "10",
+                    "content_description": "ORDEN 255826267",
+                    "imported_id ": "255826267",
+                    "order_price": "24509.0",
+                    "weight": "0.98",
+                    "volume": "1.0",
+                    "type": "delivery"
+                },
+                "shipping_origin": {
+                    "warehouse_code": "401"
+                },
+                "shipping_destination": {
+                    "customer": {
+                        "name": "Marcela Gonzalez Arias",
+                        "email": "mgggg@outlook.com",
+                        "phone": "977623070"
+                    },
+                    "delivery_address": {
+                        "home_address": {
+                            "place": "Puente Alto",
+                            "full_address": "Teofilo Belmar 6552, Puente Alto"
+                        }
+                    }
+                },
+                "carrier": {
+                    "carrier_code": "BLX",
+                    "tracking_number": "12121"
+                }
+            }
+        }).then(envio => {
+            //  console.log(response.data);
+            return envio.data;
+        }, (error) => {
+            // console.log(error);
+        });
+        ;
+        let objeto = {
+            data: envio.data
+        };
+        const delivery = yield delivery_1.default.create(objeto);
         res.status(200).json({
             msg: `creando envio`
         });

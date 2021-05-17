@@ -6,7 +6,6 @@ const Delivery = db.define('Delivery', {
     data: {
         type: DataTypes.JSON
     }
-   
 });
 
 export default Delivery;
