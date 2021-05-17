@@ -6,6 +6,7 @@ import db from '../db/connection';
 import Deliveryrouter from '../routes/delivery';
 import Empleadorouter from '../routes/empleado';
 import Palindromorouter from '../routes/palindromo';
+import Fibonaccirouter from '../routes/fibonacci';
 class Server {
     
     private app: Application;
@@ -14,7 +15,8 @@ class Server {
         empresa : '/api/empresas',
         delivery: '/api/delivery',
         empleado: '/api/empleado',
-        palindromo: '/api/palindromo'
+        palindromo: '/api/palindromo',
+        fibonacci: '/api/fibonacci'
     }
 
     constructor(){
@@ -48,8 +50,9 @@ class Server {
     routes(){
         this.app.use(this.apiPaths.empresa, Empresarouter);
         this.app.use(this.apiPaths.delivery, Deliveryrouter);
-        this.app.use(this.apiPaths.empleado, Empleadorouter)
-        this.app.use(this.apiPaths.palindromo, Palindromorouter)
+        this.app.use(this.apiPaths.empleado, Empleadorouter);
+        this.app.use(this.apiPaths.palindromo, Palindromorouter);
+        this.app.use(this.apiPaths.fibonacci, Fibonaccirouter);        
     }
 
     listen(){

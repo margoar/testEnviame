@@ -19,13 +19,15 @@ const connection_1 = __importDefault(require("../db/connection"));
 const delivery_1 = __importDefault(require("../routes/delivery"));
 const empleado_1 = __importDefault(require("../routes/empleado"));
 const palindromo_1 = __importDefault(require("../routes/palindromo"));
+const fibonacci_1 = __importDefault(require("../routes/fibonacci"));
 class Server {
     constructor() {
         this.apiPaths = {
             empresa: '/api/empresas',
             delivery: '/api/delivery',
             empleado: '/api/empleado',
-            palindromo: '/api/palindromo'
+            palindromo: '/api/palindromo',
+            fibonacci: '/api/fibonacci'
         };
         this.app = express_1.default();
         this.port = process.env.PORT || '8000';
@@ -53,6 +55,7 @@ class Server {
         this.app.use(this.apiPaths.delivery, delivery_1.default);
         this.app.use(this.apiPaths.empleado, empleado_1.default);
         this.app.use(this.apiPaths.palindromo, palindromo_1.default);
+        this.app.use(this.apiPaths.fibonacci, fibonacci_1.default);
     }
     listen() {
         this.app.listen(this.port, () => {

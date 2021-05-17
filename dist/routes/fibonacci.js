@@ -1,10 +1,9 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = require("express");
-const delivery_1 = require("../controllers/delivery");
+const fibonacci_1 = require("../controllers/fibonacci");
 const router = express_1.Router();
 //definiendo nuestros endpoint
-router.post('/', delivery_1.crearDelivery);
-router.get('/', delivery_1.tiempoEntrega);
+router.post('/', fibonacci_1.obtenerFibonacci);
 exports.default = router;
-//# sourceMappingURL=delivery.js.map
+//# sourceMappingURL=fibonacci.js.map
