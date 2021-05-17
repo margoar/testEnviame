@@ -69,7 +69,7 @@ const crearDelivery = (req, res) => __awaiter(void 0, void 0, void 0, function* 
         };
         const delivery = yield delivery_1.default.create(objeto);
         res.status(200).json({
-            msg: `creando envio`
+            msg: `envio creado`
         });
     }
     catch (error) {
