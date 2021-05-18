@@ -7,16 +7,6 @@
 -- Versión del servidor: 8.0.17
 -- Versión de PHP: 8.0.6
 
-SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-START TRANSACTION;
-SET time_zone = "+00:00";
-
-
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
-
 --
 -- Base de datos: `enviametest`
 --
@@ -31,7 +21,7 @@ CREATE TABLE `continents` (
   `id` int(10) UNSIGNED NOT NULL,
   `name` varchar(25) NOT NULL,
   `anual_adjustment` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+);
 
 --
 -- Volcado de datos para la tabla `continents`
@@ -54,7 +44,7 @@ CREATE TABLE `countries` (
   `id` int(10) UNSIGNED NOT NULL,
   `continent_id` int(11) NOT NULL,
   `name` varchar(25) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+);
 
 --
 -- Volcado de datos para la tabla `countries`
@@ -85,7 +75,7 @@ CREATE TABLE `delivery` (
   `data` json NOT NULL,
   `createdAt` timestamp NULL DEFAULT NULL,
   `updatedAt` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+);
 
 --
 -- Volcado de datos para la tabla `delivery`
@@ -108,7 +98,7 @@ CREATE TABLE `employees` (
   `salary` int(11) NOT NULL,
   `createdAt` timestamp NULL DEFAULT NULL,
   `updatedAt` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+);
 
 --
 -- Volcado de datos para la tabla `employees`
@@ -136,14 +126,14 @@ INSERT INTO `employees` (`id`, `country_id`, `first_name`, `last_name`, `salary`
 
 CREATE TABLE `empresa` (
   `id` int(11) NOT NULL,
-  `nombreFantasia` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
-  `razonSocial` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `nombreFantasia` varchar(100)  DEFAULT NULL,
+  `razonSocial` varchar(200)  NOT NULL,
   `rut` varchar(9) NOT NULL,
-  `direccion` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
+  `direccion` varchar(200)  DEFAULT NULL,
   `estado` tinyint(1) NOT NULL,
   `createdAt` timestamp NULL DEFAULT NULL,
   `updatedAt` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+);
 
 --
 -- Volcado de datos para la tabla `empresa`
@@ -264,7 +254,3 @@ ALTER TABLE `employees`
 ALTER TABLE `empresa`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
 COMMIT;
-
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
